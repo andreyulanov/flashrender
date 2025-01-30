@@ -28,7 +28,6 @@ public:
     QReadWriteLock        tile_lock;
     QList<JobAddress>     job_start_list;
     int                   job_object_count;
-    QString               path;
 
     void addCollectionToIndex(VectorTile& collection);
     void updateJobAdresses();

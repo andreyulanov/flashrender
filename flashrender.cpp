@@ -7,9 +7,9 @@
 
 using namespace flashmath;
 
-FlashRender::Map::Map(const QString& _path)
+FlashRender::Map::Map(const QString& path):
+    FlashMap(path)
 {
-  path = _path;
 }
 
 bool FlashRender::Map::intersects(const QPolygonF& polygon_m) const
@@ -37,7 +37,7 @@ void FlashRender::Map::clear()
 
 void FlashRender::Map::loadMainVectorTile(bool load_objects)
 {
-  FlashMap::loadMainVectorTile(path, load_objects);
+  FlashMap::loadMainVectorTile(load_objects);
   if (load_objects)
   {
     QWriteLocker big_locker(&main_lock);
@@ -48,7 +48,7 @@ void FlashRender::Map::loadMainVectorTile(bool load_objects)
 
 void FlashRender::Map::loadVectorTile(int tile_idx)
 {
-  FlashMap::loadVectorTile(path, tile_idx);
+  FlashMap::loadVectorTile(tile_idx);
   QWriteLocker small_locker(&tile_lock);
   addCollectionToIndex(tiles[tile_idx]);
   tiles[tile_idx].status = VectorTile::Loaded;
